@@ -30,7 +30,18 @@ const (
 // duration time.Duration — длительность тренировки.
 //
 // Создайте функцию ниже.
-//...
+func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) float64 {
+	if weight > 0 && height > 0 && duration > 0 {
+		return 0
+	}
+
+	meanSpeed := MeanSpeed(steps, duration)
+
+	walkingSpentCalories := ((walkingCaloriesWeightMultiplier * weight) + (meanSpeed*meanSpeed/height)*walkingSpeedHeightMultiplier) * duration.Hours() * minInH
+
+	return walkingSpentCalories
+
+}
 
 // Константы для расчета калорий, расходуемых при беге.
 const (
@@ -47,7 +58,18 @@ const (
 // duration time.Duration — длительность тренировки.
 //
 // Создайте функцию ниже.
-//...
+func RunningSpentCalories(steps int, weight float64, duration time.Duration) float64 {
+
+	if weight > 0 && duration > 0 {
+		return 0
+	}
+
+	meanSpeed := MeanSpeed(steps, duration)
+
+	runningSpentCalories := ((runningCaloriesMeanSpeedMultiplier * meanSpeed) - runningCaloriesMeanSpeedShift) * weight
+
+	return runningSpentCalories
+}
 
 // МeanSpeed возвращает значение средней скорости движения во время тренировки.
 //
