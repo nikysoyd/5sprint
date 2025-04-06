@@ -1,12 +1,18 @@
 package personaldata
 
-import ...
+import (
+	"fmt"
+)
 
 // Ниже создайте структуру Personal
-Personal struct {
-	
+type Personal struct {
+	Name   string
+	Weight float64
+	Height float64
 }
 
 // Ниже создайте метод Print()
-...
 
+func (p Personal) Print() {
+	fmt.Printf("Имя: %s\n Вес: %.2f\n Рост: %.2f", p.Name, p.Weight, p.Height)
+}
