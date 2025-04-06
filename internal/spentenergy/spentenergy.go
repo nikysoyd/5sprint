@@ -31,7 +31,7 @@ const (
 //
 // Создайте функцию ниже.
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) float64 {
-	if weight > 0 && height > 0 && duration > 0 {
+	if weight < 0 || height < 0 || duration < 0 {
 		return 0
 	}
 
@@ -60,7 +60,7 @@ const (
 // Создайте функцию ниже.
 func RunningSpentCalories(steps int, weight float64, duration time.Duration) float64 {
 
-	if weight > 0 && duration > 0 {
+	if weight < 0 || duration < 0 {
 		return 0
 	}
 

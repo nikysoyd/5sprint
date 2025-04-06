@@ -25,8 +25,8 @@ type DaySteps struct {
 func (ds *DaySteps) Parse(datastring string) (err error) {
 	parts := strings.Split(datastring, ",")
 
-	if len(parts) != 2 {
-		return fmt.Errorf("неверное количество данных")
+	if len(parts) != 3 {
+		return fmt.Errorf("неверное количество данных%d", len(parts))
 	}
 	steps, err := strconv.Atoi(parts[0])
 	if err != nil {
