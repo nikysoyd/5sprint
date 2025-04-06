@@ -23,7 +23,7 @@ func (t *Training) Parse(datastring string) (err error) {
 	parts := strings.Split(datastring, ",")
 
 	if len(parts) != 3 {
-		return fmt.Errorf("Неверное количество данных")
+		return fmt.Errorf("неверное количество данных")
 	}
 	steps, err := strconv.Atoi(parts[0])
 	if err != nil {
@@ -51,7 +51,7 @@ func (t *Training) Parse(datastring string) (err error) {
 func (t Training) ActionInfo() (string, error) {
 
 	if t.Duration < 0 {
-		return "", fmt.Errorf("Продолжительность меньше нуля и равна %v", t.Duration)
+		return "", fmt.Errorf("продолжительность меньше нуля и равна %v", t.Duration)
 	}
 
 	if t.TrainingType != "Бег" && t.TrainingType != "Ходьба" {
