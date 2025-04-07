@@ -51,7 +51,7 @@ func (t *Training) Parse(datastring string) (err error) {
 func (t Training) ActionInfo() (string, error) {
 
 	if t.Duration < 0 {
-		return "", fmt.Errorf("продолжительность меньше нуля и равна %v", t.Duration)
+		return "", fmt.Errorf("duration less 0 %v", t.Duration)
 	}
 
 	if t.TrainingType != "Бег" && t.TrainingType != "Ходьба" {
@@ -66,11 +66,13 @@ func (t Training) ActionInfo() (string, error) {
 
 	var calories float64
 
-	if t.TrainingType == "Бег" {
+	switch t.TrainingType {
+	case "Бег":
 
 		calories = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Duration)
 
-	} else {
+	default:
+
 		calories = spentenergy.WalkingSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
 	}
 

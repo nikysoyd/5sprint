@@ -2,8 +2,7 @@ package actioninfo
 
 import (
 	"fmt"
-	//"github.com/Yandex-Practicum/go1fl-sprint5-final/internal/daysteps"
-	//"github.com/Yandex-Practicum/go1fl-sprint5-final/internal/trainings"
+	"log"
 )
 
 // создайте интерфейс DataParser
@@ -22,13 +21,13 @@ func Info(dataset []string, dp DataParser) {
 
 		err := dp.Parse(data)
 		if err != nil {
-			fmt.Errorf("ошибка парсинга %v", err)
+			log.Printf("parsing error: %v\n", err)
 			continue
 		}
 
 		info, err := dp.ActionInfo()
 		if err != nil {
-			fmt.Errorf("ошибка формирования %v", err)
+			log.Printf("formating error %v\n", err)
 			continue
 		}
 

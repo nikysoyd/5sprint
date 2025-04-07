@@ -100,7 +100,7 @@ func MeanSpeed(steps int, duration time.Duration) float64 {
 // Создайте функцию ниже
 func Distance(steps int) float64 {
 
-	resDist := (float64(steps) * lenStep) / float64(mInKm)
+	resDist := (float64(steps) * lenStep) / mInKm
 
 	return resDist
 

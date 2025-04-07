@@ -26,17 +26,17 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	parts := strings.Split(datastring, ",")
 
 	if len(parts) != 3 {
-		return fmt.Errorf("неверное количество данных%d", len(parts))
+		return fmt.Errorf("wrong data amount%d", len(parts))
 	}
 	steps, err := strconv.Atoi(parts[0])
 	if err != nil {
-		return fmt.Errorf("ошибка парсинга шагов: %v", err)
+		return fmt.Errorf("steps error parsing: %w", err)
 	}
 	ds.Steps = steps
 
 	duration, err := time.ParseDuration(parts[2])
 	if err != nil {
-		return fmt.Errorf("ошибка парсинга продолжительности: %v", err)
+		return fmt.Errorf("duration error parsing: %v", err)
 	}
 	ds.Duration = duration
 
@@ -48,11 +48,11 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 func (ds DaySteps) ActionInfo() (string, error) {
 
 	if ds.Duration <= 0 {
-		return "", fmt.Errorf("продолжительность %v", ds.Duration)
+		return "", fmt.Errorf("duration %v", ds.Duration)
 	}
 
 	if ds.Steps <= 0 {
-		return "", fmt.Errorf("количество шагов %d", ds.Steps)
+		return "", fmt.Errorf("amount steps %d", ds.Steps)
 	}
 
 	distance := spentenergy.Distance(ds.Steps)
