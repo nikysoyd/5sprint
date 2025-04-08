@@ -23,23 +23,23 @@ func (t *Training) Parse(datastring string) (err error) {
 	parts := strings.Split(datastring, ",")
 
 	if len(parts) != 3 {
-		return fmt.Errorf("неверное количество данных")
+		return fmt.Errorf("wrong data amount")
 	}
 	steps, err := strconv.Atoi(parts[0])
 	if err != nil {
-		return fmt.Errorf("ошибка парсинга шагов: %v", err)
+		return fmt.Errorf("steps parsing error: %v", err)
 	}
 	t.Steps = steps
 
 	TrainingType := parts[1]
 	if TrainingType != "Бег" && TrainingType != "Ходьба" {
-		return fmt.Errorf("неизвестный тип активности: %s", TrainingType)
+		return fmt.Errorf("unknown training type %s", TrainingType)
 	}
 	t.TrainingType = TrainingType
 
 	duration, err := time.ParseDuration(parts[2])
 	if err != nil {
-		return fmt.Errorf("ошибка парсинга продолжительности: %v", err)
+		return fmt.Errorf("duration parsing error: %v", err)
 	}
 	t.Duration = duration
 
@@ -52,10 +52,6 @@ func (t Training) ActionInfo() (string, error) {
 
 	if t.Duration < 0 {
 		return "", fmt.Errorf("duration less 0 %v", t.Duration)
-	}
-
-	if t.TrainingType != "Бег" && t.TrainingType != "Ходьба" {
-		return "", fmt.Errorf("unknown training type: %s", t.TrainingType)
 	}
 
 	distance := spentenergy.Distance(t.Steps)
@@ -71,9 +67,14 @@ func (t Training) ActionInfo() (string, error) {
 
 		calories = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Duration)
 
-	default:
+	case "Ходьба":
 
 		calories = spentenergy.WalkingSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
+
+	default:
+
+		return "", fmt.Errorf("unknown training type: %s", t.TrainingType)
+
 	}
 
 	toBePrinted := fmt.Sprintf(
