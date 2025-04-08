@@ -78,7 +78,7 @@ func (t Training) ActionInfo() (string, error) {
 	}
 
 	toBePrinted := fmt.Sprintf(
-		"Тип тренировки: %s\n"+
+		"\nТип тренировки: %s\n"+
 			"Длительность: %.2f ч.\n"+
 			"Дистанция: %.2f км.\n"+
 			"Скорость: %.2f км/ч\n"+

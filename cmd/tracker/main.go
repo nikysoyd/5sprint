@@ -52,7 +52,7 @@ func main() {
 		Personal: person,
 	}
 
-	fmt.Println("Журнал тренировок")
+	fmt.Println("\nЖурнал тренировок")
 
 	trains.Print()
 
